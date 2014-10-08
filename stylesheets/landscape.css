@@ -1,0 +1,277 @@
+/* line 8, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+.postcard-rotate {
+  -webkit-transform-origin: rotate(-8deg);
+  -moz-transform-origin: rotate(-8deg);
+  -ms-transform-origin: rotate(-8deg);
+  -o-transform-origin: rotate(-8deg);
+  transform-origin: rotate(-8deg); }
+
+/* line 12, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+.postcard {
+  position: relative;
+  overflow: hidden;
+  height: 475px;
+  border-bottom: 15px solid #FFF;
+  left: 0;
+  right: 0;
+  top: 0;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(106, 39, 34, 0.6);
+  box-shadow: -1px 1px 1px 1px rgba(106, 39, 34, 0.6); }
+  /* line 24, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #sky {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    height: 260px;
+    background: #5487c5;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5487c5), color-stop(73%, #9ac5e3));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5487c5', endColorstr='#9ac5e3',GradientType=0 );
+    /* IE6-9 */ }
+  /* line 41, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #haze {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    height: 260px; }
+  /* line 49, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #haze.mostly-cloudy {
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #efefef 31%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(31%, #efefef));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #efefef 31%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%, #efefef 31%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%, #efefef 31%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%, #efefef 31%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=0 );
+    /* IE6-9 */
+    opacity: .8; }
+  /* line 61, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #haze.raining, .postcard #haze.stormy {
+    background: #bec3d1;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bec3d1), color-stop(91%, #8f909e));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #bec3d1 0%, #8f909e 91%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bec3d1', endColorstr='#8f909e',GradientType=0 );
+    /* IE6-9 */
+    opacity: .8; }
+  /* line 75, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #ocean {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 260px;
+    height: 250px;
+    background: #409396;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #409396 0%, #306175 91%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #409396), color-stop(91%, #306175));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #409396 0%, #306175 91%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #409396 0%, #306175 91%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #409396 0%, #306175 91%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #409396 0%, #306175 91%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409396', endColorstr='#306175',GradientType=0 );
+    /* IE6-9 */ }
+  /* line 94, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #ocean.mostly-cloudy {
+    background: #c3e4ef;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #c3e4ef 0%, #306175 54%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c3e4ef), color-stop(54%, #306175));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #c3e4ef 0%, #306175 54%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #c3e4ef 0%, #306175 54%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #c3e4ef 0%, #306175 54%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #c3e4ef 0%, #306175 54%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3e4ef', endColorstr='#306175',GradientType=0 );
+    /* IE6-9 */ }
+  /* line 106, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #ocean.storm {
+    background: #7d9a9e;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #7d9a9e 0%, #306175 54%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7d9a9e), color-stop(54%, #306175));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #7d9a9e 0%, #306175 54%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #7d9a9e 0%, #306175 54%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #7d9a9e 0%, #306175 54%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #7d9a9e 0%, #306175 54%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d9a9e', endColorstr='#306175',GradientType=0 );
+    /* IE6-9 */ }
+  /* line 118, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #sutro-hill {
+    background: url(/images/headland.png) no-repeat;
+    position: absolute;
+    left: 43px;
+    top: 193px;
+    width: 700px;
+    height: 104px;
+    z-index: 10; }
+  /* line 128, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #sutro-hill-2 {
+    background: url(/images/headland.png) no-repeat;
+    position: absolute;
+    left: 363px;
+    top: 209px;
+    width: 700px;
+    height: 104px;
+    z-index: 10; }
+  /* line 138, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #distant-hill-3 {
+    background: url(/images/forefront_hill.png) no-repeat;
+    position: absolute;
+    left: -65px;
+    top: 250px;
+    width: 700px;
+    height: 391px;
+    z-index: 10; }
+  /* line 148, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #distant-hill {
+    background: url(/images/headland.png) no-repeat;
+    position: absolute;
+    left: 560px;
+    top: 230px;
+    width: 700px;
+    height: 391px;
+    z-index: 15; }
+  /* line 158, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #distant-hill-2 {
+    background: url(/images/headland.png) no-repeat;
+    position: absolute;
+    left: 173px;
+    top: 244px;
+    width: 700px;
+    height: 391px;
+    z-index: 20; }
+  /* line 168, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #forefront-hill {
+    background: url(/images/forefront_hill.png) no-repeat;
+    position: absolute;
+    left: 358pxpx;
+    top: 285px;
+    width: 700px;
+    height: 391px;
+    z-index: 25; }
+  /* line 178, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #city-hill {
+    background: url(/images/forefront_hill.png) no-repeat;
+    position: absolute;
+    left: -40px;
+    top: 275px;
+    width: 700px;
+    height: 391px;
+    z-index: 29; }
+  /* line 188, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #city {
+    position: absolute;
+    left: -5px;
+    top: 265px;
+    width: 700px;
+    height: 391px;
+    z-index: 29; }
+  /* line 197, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #headland {
+    background: url(/images/headland.png) no-repeat;
+    position: absolute;
+    left: 385px;
+    top: 280px;
+    width: 720px;
+    height: 391px;
+    z-index: 30; }
+  /* line 207, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #beach {
+    background: url(/images/beach.png) no-repeat;
+    position: absolute;
+    left: 218px;
+    top: 371px;
+    width: 700px;
+    height: 391px;
+    z-index: 35; }
+  /* line 217, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #headland-cliff {
+    position: absolute;
+    left: 626px;
+    top: 333px;
+    width: 280px;
+    height: 75px;
+    z-index: 40; }
+  /* line 226, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #bridge {
+    background: url(/images/gg2.png) no-repeat;
+    position: absolute;
+    left: -100px;
+    top: 115px;
+    width: 770px;
+    height: 450px;
+    z-index: 45;
+    background-size: contain; }
+  /* line 237, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #weather_background {
+    z-index: 0;
+    height: 360px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0; }
+  /* line 246, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #weather_midground {
+    z-index: 20;
+    height: 260px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0; }
+  /* line 255, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #weather_foreground {
+    z-index: 50;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0; }
