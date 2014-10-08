@@ -90,6 +90,13 @@
       }
     };
 
+    Weather.prototype.changeWind = function(windspeed) {
+      var wind;
+      wind = this.get("wind");
+      wind.speed = windspeed;
+      return this.set("wind", wind);
+    };
+
     Weather.prototype.setWindspeed = function() {
       var wind, windSpeed;
       wind = this.get("wind");
