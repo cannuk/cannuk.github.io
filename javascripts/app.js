@@ -18,6 +18,41 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  sdn.Models.Time = (function(_super) {
+    __extends(Time, _super);
+
+    function Time() {
+      return Time.__super__.constructor.apply(this, arguments);
+    }
+
+    Time.prototype.urlRoot = "http://www.isitfoggyinsanfrancisco.com/forecast/time?callback=?";
+
+    Time.prototype.sync = function(method, model, options) {
+      var params;
+      params = _.extend({
+        type: 'GET',
+        dataType: 'jsonp',
+        url: model.url(),
+        jsonp: 'callback',
+        processData: false
+      }, options);
+      return $.jsonp(params);
+    };
+
+    Time.prototype.parse = function(response) {
+      var _ref, _ref1;
+      return response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+    };
+
+    return Time;
+
+  })(Backbone.Model);
+
+}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
   sdn.Models.YQLModel = (function(_super) {
     __extends(YQLModel, _super);
 
@@ -38,8 +73,13 @@
     };
 
     YQLModel.prototype.parse = function(response) {
-      var _ref, _ref1;
-      return response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      var _ref, _ref1, _ref2;
+      response = response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      if (((_ref2 = response.item.condition) != null ? _ref2.code : void 0) != null) {
+        response.conditionCode = response.item.condition.code;
+        response.conditionText = response.item.condition.text;
+      }
+      return response;
     };
 
     return YQLModel;
@@ -48,13 +88,15 @@
 
 }).call(this);
 (function() {
-  var __hasProp = {}.hasOwnProperty,
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   sdn.Models.Weather = (function(_super) {
     __extends(Weather, _super);
 
     function Weather() {
+      this.bindEvents = __bind(this.bindEvents, this);
       return Weather.__super__.constructor.apply(this, arguments);
     }
 
@@ -63,29 +105,36 @@
     Weather.prototype.initialize = function() {
       this.setScene();
       this.setWindspeed();
-      console.log(this);
-      this.on("change:wind", this.setWindspeed);
-      return this.on("change:item", this.setScene);
+      return this.bindEvents();
+    };
+
+    Weather.prototype.bindEvents = function() {
+      this.listenTo(this, "change", this.setWindspeed);
+      this.listenTo(this, "change:conditionCode", this.setScene);
+      return this.listenTo(this, "change:conditionText", this.setScene);
     };
 
     Weather.prototype.setScene = function() {
-      var code, codes, item, scene, scenes, _ref;
-      item = this.get("item");
-      code = (item != null ? (_ref = item.condition) != null ? _ref.code : void 0 : void 0) ? item.condition.code : 29;
-      console.log(code);
-      scenes = {
-        'pcloud': [30, 44, 29],
-        'mcloud': [26, 27],
-        'thunder': [37, 38, 39, 45, 47],
-        'rain': [8, 9, 11, 12, 40, 28]
-      };
-      for (scene in scenes) {
-        if (!__hasProp.call(scenes, scene)) continue;
-        codes = scenes[scene];
-        if (_.indexOf(codes, code) !== -1) {
-          return this.set({
-            scene: scene
-          });
+      var code, codes, conditionCode, scene, scenes;
+      conditionCode = this.get("conditionCode");
+      if (conditionCode) {
+        code = parseInt(conditionCode);
+        console.log(code);
+        scenes = {
+          'clear': [32, 31, 33, 34],
+          'pcloud': [29, 30, 44],
+          'mcloud': [26, 27, 28],
+          'thunder': [37, 38, 39, 45, 47],
+          'rain': [8, 9, 11, 12, 40, 28]
+        };
+        for (scene in scenes) {
+          if (!__hasProp.call(scenes, scene)) continue;
+          codes = scenes[scene];
+          if (_.indexOf(codes, code) >= 0) {
+            return this.set({
+              scene: scene
+            });
+          }
         }
       }
     };
@@ -94,7 +143,8 @@
       var wind;
       wind = this.get("wind");
       wind.speed = windspeed;
-      return this.set("wind", wind);
+      this.set("wind", wind);
+      return this.setWindspeed();
     };
 
     Weather.prototype.setWindspeed = function() {
@@ -102,7 +152,8 @@
       wind = this.get("wind");
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
-        windSpeed = (parseInt(wind.speed) / 7) * .04;
+        windSpeed = (parseInt(wind.speed)) * .03;
+        console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed
         });
@@ -441,6 +492,9 @@
     }
 
     Weather.prototype.clouds = {
+      "clear": {
+        density: 0
+      },
       "pcloud": {
         color: {
           r: 255,
@@ -463,7 +517,7 @@
           g: 195,
           b: 209
         },
-        density: 25
+        density: 35
       },
       "thunder": {
         color: {
@@ -471,7 +525,7 @@
           g: 195,
           b: 209
         },
-        density: 25
+        density: 40
       }
     };
 
@@ -556,13 +610,15 @@
     Weather.prototype.draw = function() {
       var cloudDensity, layer, segmentSize, x, _i, _results;
       layer = new Kinetic.Layer();
-      cloudDensity = this.clouds[this.model.get('scene')].density;
-      segmentSize = Math.floor(this.width / cloudDensity);
-      _results = [];
-      for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
-        _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
+      if (this.clouds[this.model.get('scene')].density > 0) {
+        cloudDensity = this.clouds[this.model.get('scene')].density;
+        segmentSize = Math.floor(this.width / cloudDensity);
+        _results = [];
+        for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
+          _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
+        }
+        return _results;
       }
-      return _results;
     };
 
     Weather.prototype.drawCloud = function(layer, x, y) {
@@ -601,26 +657,152 @@
 
 }).call(this);
 (function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  sdn.Views.WeatherConditions = (function(_super) {
+    __extends(WeatherConditions, _super);
+
+    function WeatherConditions() {
+      return WeatherConditions.__super__.constructor.apply(this, arguments);
+    }
+
+    WeatherConditions.prototype.events = {
+      "click .weather-control-panel-button": "changeWeather"
+    };
+
+    WeatherConditions.prototype.initialize = function() {
+      return this.listenTo(this.model, "change:conditionText", this.render);
+    };
+
+    WeatherConditions.prototype.render = function() {
+      var item;
+      item = this.model.get("item");
+      this.$el.find(".temperature").html("" + item.condition.temp);
+      return this.$el.find(".conditions").text(this.model.get("conditionText"));
+    };
+
+    WeatherConditions.prototype.changeWeather = function() {
+      this.trigger("weatherconditions:change");
+      return false;
+    };
+
+    return WeatherConditions;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  sdn.Views.WeatherControlPanel = (function(_super) {
+    __extends(WeatherControlPanel, _super);
+
+    function WeatherControlPanel() {
+      return WeatherControlPanel.__super__.constructor.apply(this, arguments);
+    }
+
+    WeatherControlPanel.prototype.events = {
+      "click .close-button": "hide",
+      "click": "cancelClose",
+      "click .condition": "chooseCondition",
+      "click button[data-panel]": "changePanel",
+      "change [name=windSpeed]": "setWind"
+    };
+
+    WeatherControlPanel.prototype.render = function() {
+      this.hide();
+      this.resetPanels();
+      this.$el.find(".row-panel").first().css("display", "block");
+      this.$el.find("button[data-panel]").first().addClass("active");
+      this.selectScene();
+      return this.selectWind();
+    };
+
+    WeatherControlPanel.prototype.show = function() {
+      this._isShown = true;
+      this.$el.addClass("visible");
+      return false;
+    };
+
+    WeatherControlPanel.prototype.hide = function() {
+      this._isShown = false;
+      this.$el.removeClass("visible");
+      return false;
+    };
+
+    WeatherControlPanel.prototype.resetPanels = function() {
+      this.$el.find(".row-panel").css("display", "none");
+      return this.$el.find("button[data-panel]").removeClass("active");
+    };
+
+    WeatherControlPanel.prototype.cancelClose = function() {
+      return false;
+    };
+
+    WeatherControlPanel.prototype.selectScene = function() {
+      this.$el.find(".condition-wrapper").removeClass("selected");
+      return this.$el.find("[data-scene=" + (this.model.get("scene")) + "]").find(".condition-wrapper").addClass("selected");
+    };
+
+    WeatherControlPanel.prototype.selectWind = function() {
+      return this.$el.find("[name=windSpeed]").val(this.model.get("windspeed"));
+    };
+
+    WeatherControlPanel.prototype.setWind = function(ev) {
+      return this.model.changeWind($(ev.currentTarget).val());
+    };
+
+    WeatherControlPanel.prototype.chooseCondition = function(ev) {
+      var code, item, text;
+      code = $(ev.currentTarget).data("condition-code");
+      text = $(ev.currentTarget).data("condition-text");
+      item = _.clone(this.model.get("item"));
+      this.model.set("conditionCode", code);
+      this.model.set("conditionText", text);
+      return this.trigger("controlpanel:changecondition", {
+        conditionCode: code
+      });
+    };
+
+    WeatherControlPanel.prototype.changePanel = function(ev) {
+      var $target, panel;
+      $target = $(ev.currentTarget);
+      panel = $target.data("panel");
+      this.resetPanels();
+      this.$el.find(".panel-" + panel).css("display", "block");
+      $target.addClass("active");
+      return false;
+    };
+
+    return WeatherControlPanel;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
   _(sdn).extend({
     app: {
       init: function() {
+        var tf, wf;
         this.weather = new sdn.Models.Weather();
-        return this.weather.fetch({
-          success: (function(_this) {
-            return function() {
-              if (_this.weather.has("item")) {
-                return _this.createWeather();
-              } else {
-                return _this.setDefaultWeather();
-              }
-            };
-          })(this),
-          error: (function(_this) {
-            return function() {
+        this.time = new sdn.Models.Time();
+        wf = this.weather.fetch();
+        tf = this.time.fetch();
+        return $.when(tf, wf).done((function(_this) {
+          return function() {
+            if (_this.weather.has("item")) {
+              return _this.createWeather();
+            } else {
               return _this.setDefaultWeather();
-            };
-          })(this)
-        });
+            }
+          };
+        })(this)).fail((function(_this) {
+          return function() {
+            return _this.setDefaultWeather();
+          };
+        })(this));
       },
       createWeather: function() {
         new sdn.Views.Weather({
@@ -644,21 +826,45 @@
         new sdn.Views.Haze({
           model: this.weather
         }).render();
-        return new sdn.Views.Ocean({
+        new sdn.Views.Ocean({
           model: this.weather
         }).render();
+        this.controlPanel = new sdn.Views.WeatherControlPanel({
+          model: this.weather,
+          el: $(".weather-control-panel").get(0)
+        });
+        this.conditions = new sdn.Views.WeatherConditions({
+          model: this.weather,
+          el: $(".weather-conditions").get(0)
+        });
+        this.weather.on("change", this.controlPanel.render());
+        this.conditions.on("weatherconditions:change", ((function(_this) {
+          return function() {
+            return _this.controlPanel.show();
+          };
+        })(this)));
+        this.controlPanel.render();
+        this.conditions.render();
+        return $(window).click(((function(_this) {
+          return function() {
+            return _this.controlPanel.hide();
+          };
+        })(this)));
       },
       setDefaultWeather: function() {
         this.weather.set({
           item: {
             condition: {
+              temp: 68,
               code: 30,
-              status: 'Partly Cloudy'
+              text: 'Partly Cloudy'
             }
           },
           wind: {
             speed: 12
-          }
+          },
+          conditionCode: 30,
+          conditionText: 'Partly Cloudy'
         });
         return this.createWeather();
       },

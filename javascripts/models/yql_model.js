@@ -38,8 +38,13 @@
     };
 
     YQLModel.prototype.parse = function(response) {
-      var _ref, _ref1;
-      return response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      var _ref, _ref1, _ref2;
+      response = response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      if (((_ref2 = response.item.condition) != null ? _ref2.code : void 0) != null) {
+        response.conditionCode = response.item.condition.code;
+        response.conditionText = response.item.condition.text;
+      }
+      return response;
     };
 
     return YQLModel;

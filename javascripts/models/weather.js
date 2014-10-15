@@ -38,8 +38,13 @@
     };
 
     YQLModel.prototype.parse = function(response) {
-      var _ref, _ref1;
-      return response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      var _ref, _ref1, _ref2;
+      response = response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
+      if (((_ref2 = response.item.condition) != null ? _ref2.code : void 0) != null) {
+        response.conditionCode = response.item.condition.code;
+        response.conditionText = response.item.condition.text;
+      }
+      return response;
     };
 
     return YQLModel;
@@ -48,13 +53,15 @@
 
 }).call(this);
 (function() {
-  var __hasProp = {}.hasOwnProperty,
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   sdn.Models.Weather = (function(_super) {
     __extends(Weather, _super);
 
     function Weather() {
+      this.bindEvents = __bind(this.bindEvents, this);
       return Weather.__super__.constructor.apply(this, arguments);
     }
 
@@ -63,29 +70,36 @@
     Weather.prototype.initialize = function() {
       this.setScene();
       this.setWindspeed();
-      console.log(this);
-      this.on("change:wind", this.setWindspeed);
-      return this.on("change:item", this.setScene);
+      return this.bindEvents();
+    };
+
+    Weather.prototype.bindEvents = function() {
+      this.listenTo(this, "change", this.setWindspeed);
+      this.listenTo(this, "change:conditionCode", this.setScene);
+      return this.listenTo(this, "change:conditionText", this.setScene);
     };
 
     Weather.prototype.setScene = function() {
-      var code, codes, item, scene, scenes, _ref;
-      item = this.get("item");
-      code = (item != null ? (_ref = item.condition) != null ? _ref.code : void 0 : void 0) ? item.condition.code : 29;
-      console.log(code);
-      scenes = {
-        'pcloud': [30, 44, 29],
-        'mcloud': [26, 27],
-        'thunder': [37, 38, 39, 45, 47],
-        'rain': [8, 9, 11, 12, 40, 28]
-      };
-      for (scene in scenes) {
-        if (!__hasProp.call(scenes, scene)) continue;
-        codes = scenes[scene];
-        if (_.indexOf(codes, code) !== -1) {
-          return this.set({
-            scene: scene
-          });
+      var code, codes, conditionCode, scene, scenes;
+      conditionCode = this.get("conditionCode");
+      if (conditionCode) {
+        code = parseInt(conditionCode);
+        console.log(code);
+        scenes = {
+          'clear': [32, 31, 33, 34],
+          'pcloud': [29, 30, 44],
+          'mcloud': [26, 27, 28],
+          'thunder': [37, 38, 39, 45, 47],
+          'rain': [8, 9, 11, 12, 40, 28]
+        };
+        for (scene in scenes) {
+          if (!__hasProp.call(scenes, scene)) continue;
+          codes = scenes[scene];
+          if (_.indexOf(codes, code) >= 0) {
+            return this.set({
+              scene: scene
+            });
+          }
         }
       }
     };
@@ -94,7 +108,8 @@
       var wind;
       wind = this.get("wind");
       wind.speed = windspeed;
-      return this.set("wind", wind);
+      this.set("wind", wind);
+      return this.setWindspeed();
     };
 
     Weather.prototype.setWindspeed = function() {
@@ -102,7 +117,8 @@
       wind = this.get("wind");
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
-        windSpeed = (parseInt(wind.speed) / 7) * .04;
+        windSpeed = (parseInt(wind.speed)) * .03;
+        console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed
         });

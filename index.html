@@ -14,32 +14,119 @@
   </head>
   
   <body class="index">
-    <div class="postcard">
-  <div id="sky"></div>
-  <div id="haze" class=""></div>
-  <div id="weather">
-    <div id="weather_background"></div>
-    <div id="weather_midground"></div>
-    <div id="weather_foreground"></div>
+    <div class="postcard-background">
+  <div class="postcard">
+    <div id="sky"></div>
+    <div id="sky-rising"></div>
+    <div id="sky-night"></div>
+    <div id="haze" class=""></div>
+    <div id="weather">
+      <div id="weather_background"></div>
+      <div id="weather_midground"></div>
+      <div id="weather_foreground"></div>
+    </div>
+    <div id="ocean"></div>
+    <div id="sutro-hill"></div>
+    <div id="sutro-hill-2"></div>
+    <div id="distant-hill-3"></div>
+    <div id="distant-hill-2"></div>
+    <div id="distant-hill"></div>
+    <div id="forefront-hill"></div>
+    <div id="headland"></div>
+    <div id="city-hill"></div>
+    <div id="city"></div>
+    <div id="headland-cliff"></div>
+    <div id="bridge"></div>
+    <div class="weather-conditions">
+      <h1 class="temperature"></h1>
+
+      <div class="conditions"></div>
+      <button class="weather-control-panel-button">Control the weather</button>
+    </div>
   </div>
-  <div id="ocean"></div>
-  <div id="sutro-hill"></div>
-  <div id="sutro-hill-2"></div>
-  <div id="distant-hill-3"></div>
-  <div id="distant-hill-2"></div>
-  <div id="distant-hill"></div>
-  <div id="forefront-hill"></div>
-  <div id="headland"></div>
-  <div id="city-hill"></div>
-  <div id="city"></div>
-  <div id="headland-cliff"></div>
-  <div id="bridge"></div>
+</div>
+
+<div class="weather-control-panel">
+  <div class="container">
+    <div class="row">
+      <div style="text-align: center" class="col-xs-6 col-xs-offset-3 controls-buttons-wrapper">
+        <div class="btn-group controls-button-group">
+          <div class="btn-group">
+            <button type="button" class="btn active" data-panel="conditions">Conditions</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn" data-panel="wind">Wind</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn" data-panel="time">Time</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-panel panel-conditions">
+      <div class="control-panel">
+        <div class="condition col-xs-2" data-condition-code="32" data-condition-text="Clear">
+          <div class="condition-wrapper">
+            <div class="meteocon" meteocon-icon="B" ></div>
+            <p>Clear</p>
+          </div>
+        </div>
+        <div class="condition col-xs-2" data-condition-code="29" data-condition-text="Partly Cloudy">
+          <div class="condition-wrapper">
+            <div class="meteocon" meteocon-icon="H"></div>
+            <p>Partly Cloudy</p>
+          </div>
+        </div>
+        <div class="condition col-xs-2" data-condition-code="26" data-condition-text="Mostly Cloudy">
+          <div class="condition-wrapper selected">
+            <div class="meteocon" meteocon-icon="Y"></div>
+            <p>Mostly Cloudy</p>
+          </div>
+        </div>
+        <div class="condition col-xs-2" data-condition-code="8" data-condition-text="Rain">
+          <div class="condition-wrapper">
+            <div class="meteocon" meteocon-icon="R"></div>
+            <p>Rain</p>
+          </div>
+        </div>
+        <div class="condition col-xs-2" data-condition-code="37" data-condition-text="Thunderstorms">
+          <div class="condition-wrapper">
+            <div class="meteocon" meteocon-icon="P"></div>
+            <p>Thunderstorms</p>
+          </div>
+        </div>
+        <div class="condition col-xs-2" data-condition-code="fog" data-condition-text="Fog">
+          <div class="condition-wrapper">
+            <div class="meteocon" meteocon-icon="L"></div>
+            <p>Fog</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row row-panel panel-wind">
+      <div class="col-xs-1">
+        <div class="meteocon" meteocon-icon="N"></div>
+      </div>
+      <div class="col-xs-10">
+        <input name="windSpeed" type="range" min="0" max="200" step="1" />
+      </div>
+      <div class="col-xs-1">
+        <div class="meteocon" meteocon-icon="S"></div>
+      </div>
+    </div>
+    <div class="row row-panel panel-time">
+
+    </div>
+  </div>
+</div>
 </div>
 <div class="container">
   <div class="row">
     <div class="col-md-12 introduction">
-      <p><span class="highlight"> Hi, I'm Sean,</span> a Software Engineer living and working in the beautiful San Francisco
-        Bay area. I specialize in <span class="highlight">front-end</span> development and I am also a proficient full-stack developer.</span> </p>
+      <p><span class="highlight"> Hi, I'm Sean,</span> a Software Engineer living and working in the beautiful San
+        Francisco
+        Bay area. I specialize in <span class="highlight">front-end</span> development and I am also a proficient
+        full-stack developer.</span> </p>
     </div>
   </div>
 </div>

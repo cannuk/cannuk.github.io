@@ -204,6 +204,9 @@
     }
 
     Weather.prototype.clouds = {
+      "clear": {
+        density: 0
+      },
       "pcloud": {
         color: {
           r: 255,
@@ -226,7 +229,7 @@
           g: 195,
           b: 209
         },
-        density: 25
+        density: 35
       },
       "thunder": {
         color: {
@@ -234,7 +237,7 @@
           g: 195,
           b: 209
         },
-        density: 25
+        density: 40
       }
     };
 
@@ -319,13 +322,15 @@
     Weather.prototype.draw = function() {
       var cloudDensity, layer, segmentSize, x, _i, _results;
       layer = new Kinetic.Layer();
-      cloudDensity = this.clouds[this.model.get('scene')].density;
-      segmentSize = Math.floor(this.width / cloudDensity);
-      _results = [];
-      for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
-        _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
+      if (this.clouds[this.model.get('scene')].density > 0) {
+        cloudDensity = this.clouds[this.model.get('scene')].density;
+        segmentSize = Math.floor(this.width / cloudDensity);
+        _results = [];
+        for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
+          _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
+        }
+        return _results;
       }
-      return _results;
     };
 
     Weather.prototype.drawCloud = function(layer, x, y) {
