@@ -13,9 +13,7 @@
       "click .weather-control-panel-button": "changeWeather"
     };
 
-    WeatherConditions.prototype.initialize = function() {
-      return this.listenTo(this.model, "change:conditionText", this.render);
-    };
+    WeatherConditions.prototype.initialize = function() {};
 
     WeatherConditions.prototype.render = function() {
       var item;

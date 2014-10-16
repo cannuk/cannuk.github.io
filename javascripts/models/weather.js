@@ -53,15 +53,13 @@
 
 }).call(this);
 (function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
+  var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   sdn.Models.Weather = (function(_super) {
     __extends(Weather, _super);
 
     function Weather() {
-      this.bindEvents = __bind(this.bindEvents, this);
       return Weather.__super__.constructor.apply(this, arguments);
     }
 
@@ -74,9 +72,9 @@
     };
 
     Weather.prototype.bindEvents = function() {
-      this.listenTo(this, "change", this.setWindspeed);
-      this.listenTo(this, "change:conditionCode", this.setScene);
-      return this.listenTo(this, "change:conditionText", this.setScene);
+      this.on("change:conditionCode", this.setScene);
+      this.on("change", this.setWindspeed);
+      return true;
     };
 
     Weather.prototype.setScene = function() {
@@ -101,6 +99,7 @@
             });
           }
         }
+        return true;
       }
     };
 
@@ -117,7 +116,7 @@
       wind = this.get("wind");
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
-        windSpeed = (parseInt(wind.speed)) * .03;
+        windSpeed = (parseInt(wind.speed)) * .012;
         console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed

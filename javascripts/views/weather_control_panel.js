@@ -14,7 +14,7 @@
       "click": "cancelClose",
       "click .condition": "chooseCondition",
       "click button[data-panel]": "changePanel",
-      "change [name=windSpeed]": "setWind"
+      "change input[name=windSpeed]": "setWind"
     };
 
     WeatherControlPanel.prototype.render = function() {
@@ -53,7 +53,9 @@
     };
 
     WeatherControlPanel.prototype.selectWind = function() {
-      return this.$el.find("[name=windSpeed]").val(this.model.get("windspeed"));
+      var wind;
+      wind = this.model.get("wind");
+      return this.$el.find("[name=windSpeed]").val(wind.speed);
     };
 
     WeatherControlPanel.prototype.setWind = function(ev) {
@@ -67,9 +69,10 @@
       item = _.clone(this.model.get("item"));
       this.model.set("conditionCode", code);
       this.model.set("conditionText", text);
-      return this.trigger("controlpanel:changecondition", {
+      this.trigger("controlpanel:changecondition", {
         conditionCode: code
       });
+      return false;
     };
 
     WeatherControlPanel.prototype.changePanel = function(ev) {

@@ -20404,16 +20404,16 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  sdn.Models.Time = (function(_super) {
-    __extends(Time, _super);
+  sdn.Models.Fog = (function(_super) {
+    __extends(Fog, _super);
 
-    function Time() {
-      return Time.__super__.constructor.apply(this, arguments);
+    function Fog() {
+      return Fog.__super__.constructor.apply(this, arguments);
     }
 
-    Time.prototype.urlRoot = "http://www.isitfoggyinsanfrancisco.com/forecast/time?callback=?";
+    Fog.prototype.urlRoot = "http://www.isitfoggyinsanfrancisco.com/forecast/current?callback=?";
 
-    Time.prototype.sync = function(method, model, options) {
+    Fog.prototype.sync = function(method, model, options) {
       var params;
       params = _.extend({
         type: 'GET',
@@ -20425,12 +20425,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
       return $.jsonp(params);
     };
 
-    Time.prototype.parse = function(response) {
-      var _ref, _ref1;
-      return response != null ? (_ref = response.query) != null ? (_ref1 = _ref.results) != null ? _ref1.channel : void 0 : void 0 : void 0;
-    };
-
-    return Time;
+    return Fog;
 
   })(Backbone.Model);
 
@@ -20474,15 +20469,13 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
 
 }).call(this);
 (function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
+  var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   sdn.Models.Weather = (function(_super) {
     __extends(Weather, _super);
 
     function Weather() {
-      this.bindEvents = __bind(this.bindEvents, this);
       return Weather.__super__.constructor.apply(this, arguments);
     }
 
@@ -20495,9 +20488,9 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
     };
 
     Weather.prototype.bindEvents = function() {
-      this.listenTo(this, "change", this.setWindspeed);
-      this.listenTo(this, "change:conditionCode", this.setScene);
-      return this.listenTo(this, "change:conditionText", this.setScene);
+      this.on("change:conditionCode", this.setScene);
+      this.on("change", this.setWindspeed);
+      return true;
     };
 
     Weather.prototype.setScene = function() {
@@ -20522,6 +20515,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
             });
           }
         }
+        return true;
       }
     };
 
@@ -20538,7 +20532,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
       wind = this.get("wind");
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
-        windSpeed = (parseInt(wind.speed)) * .03;
+        windSpeed = (parseInt(wind.speed)) * .012;
         console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed
@@ -20549,6 +20543,302 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
     return Weather;
 
   })(sdn.Models.YQLModel);
+
+}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  sdn.Views.Weather = (function(_super) {
+    __extends(Weather, _super);
+
+    function Weather() {
+      return Weather.__super__.constructor.apply(this, arguments);
+    }
+
+    Weather.prototype.clouds = {
+      "clear": {
+        density: 0
+      },
+      "pcloud": {
+        color: {
+          r: 255,
+          g: 255,
+          b: 255
+        },
+        density: 4
+      },
+      "mcloud": {
+        color: {
+          r: 255,
+          g: 255,
+          b: 255
+        },
+        density: 10
+      },
+      "rain": {
+        color: {
+          r: 190,
+          g: 195,
+          b: 209
+        },
+        density: 20
+      },
+      "thunder": {
+        color: {
+          r: 190,
+          g: 195,
+          b: 209
+        },
+        density: 28
+      }
+    };
+
+    Weather.prototype.initialize = function(options) {
+      var _ref, _ref1, _ref2;
+      this.windModifier = (_ref = options.windModifier) != null ? _ref : 0;
+      this.delay = (_ref1 = options.delay) != null ? _ref1 : 0;
+      this.ceiling = (_ref2 = options.ceiling) != null ? _ref2 : 20;
+      this.model.on("change:scene", this.render, this);
+      return this.model.on("change:windspeed", function() {
+        this.windSpeed = this.model.get("windspeed");
+        return this.windSpeed += this.windModifier;
+      }, this);
+    };
+
+    Weather.prototype.render = function() {
+      if (this.isRendered) {
+        this.$el.html('');
+      }
+      this.width = this.$el.width();
+      this.height = this.$el.height();
+      this.stage = new Kinetic.Stage({
+        container: this.$el.get(0),
+        width: this.width,
+        height: this.height
+      });
+      this.isRendered = true;
+      if (this.delay > 0) {
+        return setTimeout((function(_this) {
+          return function() {
+            return _this.draw();
+          };
+        })(this), this.delay);
+      } else {
+        return this.draw();
+      }
+    };
+
+    Weather.prototype.createCloud = function(height, width, x, y) {
+      var cloudCanvas, context, grid, num, size;
+      if (height == null) {
+        height = 3;
+      }
+      if (width == null) {
+        width = 15;
+      }
+      if (x == null) {
+        x = 0;
+      }
+      if (y == null) {
+        y = 0;
+      }
+      size = 23.7;
+      cloudCanvas = document.createElement("canvas");
+      context = cloudCanvas.getContext("2d");
+      cloudCanvas.width = width * size;
+      cloudCanvas.height = height * (size + 20);
+      grid = (function() {
+        var _i, _results;
+        _results = [];
+        for (num = _i = 0; 0 <= height ? _i <= height : _i >= height; num = 0 <= height ? ++_i : --_i) {
+          _results.push((function() {
+            var _j, _results1;
+            _results1 = [];
+            for (num = _j = 0; 0 <= width ? _j <= width : _j >= width; num = 0 <= width ? ++_j : --_j) {
+              _results1.push(Math.round(Math.random()));
+            }
+            return _results1;
+          })());
+        }
+        return _results;
+      })();
+      $cloudgen.drawCloudGroup(context, grid, 40, 40, 25, this.clouds[this.model.get('scene')].color);
+      return new Kinetic.Image({
+        image: cloudCanvas,
+        x: x,
+        y: y,
+        opacity: 0
+      });
+    };
+
+    Weather.prototype.draw = function() {
+      var cloudDensity, layer, segmentSize, x, _i, _results;
+      layer = new Kinetic.Layer();
+      if (this.clouds[this.model.get('scene')].density > 0) {
+        cloudDensity = this.clouds[this.model.get('scene')].density;
+        segmentSize = Math.floor((this.width * 2) / cloudDensity);
+        _results = [];
+        for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
+          _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
+        }
+        return _results;
+      }
+    };
+
+    Weather.prototype.drawCloud = function(layer, x, y) {
+      var anim, cloud, cloudWidth;
+      cloud = this.createCloud(3, 15, x, y);
+      this.windSpeed = this.model.get('windspeed');
+      this.windSpeed += this.windModifier;
+      cloudWidth = cloud.getWidth();
+      layer.add(cloud);
+      this.stage.add(layer);
+      cloud.transitionTo({
+        opacity: 1,
+        duration: 1
+      });
+      anim = new Kinetic.Animation({
+        func: (function(_this) {
+          return function(frame) {
+            var pos;
+            pos = cloud.getX() - _this.windSpeed;
+            if ((cloud.getX() + cloudWidth) <= 0) {
+              pos = _this.stage.getWidth() + 10;
+              y = Math.floor(Math.random() * _this.height) - 120;
+              cloud.setY(y);
+            }
+            return cloud.setX(pos);
+          };
+        })(this),
+        node: layer
+      });
+      return anim.start();
+    };
+
+    return Weather;
+
+  })(Backbone.View);
+
+}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  sdn.Views.Fog = (function(_super) {
+    __extends(Fog, _super);
+
+    function Fog() {
+      return Fog.__super__.constructor.apply(this, arguments);
+    }
+
+    Fog.prototype.render = function() {
+      if (this.isRendered) {
+        this.$el.html('');
+      }
+      this.width = this.$el.width();
+      this.height = this.$el.height();
+      this.stage = new Kinetic.Stage({
+        container: this.$el.get(0),
+        width: this.width,
+        height: this.height
+      });
+      this.isRendered = true;
+      if (this.model.get("foggy") === "yes" || this.model.get("foggy") === "probably") {
+        return this.draw();
+      }
+    };
+
+    Fog.prototype.createCloud = function(height, width, x, y) {
+      var cloudCanvas, context, grid, num, size;
+      if (height == null) {
+        height = 3;
+      }
+      if (width == null) {
+        width = 15;
+      }
+      if (x == null) {
+        x = 0;
+      }
+      if (y == null) {
+        y = 0;
+      }
+      size = 40;
+      cloudCanvas = document.createElement("canvas");
+      context = cloudCanvas.getContext("2d");
+      cloudCanvas.width = width * size;
+      cloudCanvas.height = height * (size + 20);
+      grid = (function() {
+        var _i, _results;
+        _results = [];
+        for (num = _i = 0; 0 <= height ? _i <= height : _i >= height; num = 0 <= height ? ++_i : --_i) {
+          _results.push((function() {
+            var _j, _results1;
+            _results1 = [];
+            for (num = _j = 0; 0 <= width ? _j <= width : _j >= width; num = 0 <= width ? ++_j : --_j) {
+              _results1.push(Math.round(Math.random()));
+            }
+            return _results1;
+          })());
+        }
+        return _results;
+      })();
+      $cloudgen.drawCloudGroup(context, grid, 40, 40, 25, {
+        r: 240,
+        g: 240,
+        b: 240
+      });
+      return new Kinetic.Image({
+        image: cloudCanvas,
+        x: x,
+        y: y,
+        opacity: 0
+      });
+    };
+
+    Fog.prototype.draw = function() {
+      var cloudDensity, layer, segmentSize, x, _i, _results;
+      layer = new Kinetic.Layer();
+      cloudDensity = 30;
+      segmentSize = Math.floor((this.width * 2) / cloudDensity);
+      _results = [];
+      for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
+        _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) + 10));
+      }
+      return _results;
+    };
+
+    Fog.prototype.drawCloud = function(layer, x, y) {
+      var anim, cloud, cloudWidth;
+      cloud = this.createCloud(10, 25, x, y);
+      this.windSpeed = 0;
+      this.windSpeed += this.windModifier;
+      cloudWidth = cloud.getWidth();
+      layer.add(cloud);
+      this.stage.add(layer);
+      cloud.transitionTo({
+        opacity: .6,
+        duration: 2
+      });
+      anim = new Kinetic.Animation({
+        func: (function(_this) {
+          return function(frame) {
+            var pos;
+            pos = cloud.getX() - _this.windSpeed;
+            if ((cloud.getX() + cloudWidth) <= 0) {
+              pos = _this.stage.getWidth() + 10;
+            }
+            return cloud.setX(pos);
+          };
+        })(this),
+        node: layer
+      });
+      return anim.start();
+    };
+
+    return Fog;
+
+  })(sdn.Views.Weather);
 
 }).call(this);
 (function() {
@@ -20692,182 +20982,6 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  sdn.Views.Weather = (function(_super) {
-    __extends(Weather, _super);
-
-    function Weather() {
-      return Weather.__super__.constructor.apply(this, arguments);
-    }
-
-    Weather.prototype.clouds = {
-      "clear": {
-        density: 0
-      },
-      "pcloud": {
-        color: {
-          r: 255,
-          g: 255,
-          b: 255
-        },
-        density: 8
-      },
-      "mcloud": {
-        color: {
-          r: 255,
-          g: 255,
-          b: 255
-        },
-        density: 22
-      },
-      "rain": {
-        color: {
-          r: 190,
-          g: 195,
-          b: 209
-        },
-        density: 35
-      },
-      "thunder": {
-        color: {
-          r: 190,
-          g: 195,
-          b: 209
-        },
-        density: 40
-      }
-    };
-
-    Weather.prototype.initialize = function(options) {
-      var _ref, _ref1;
-      this.windModifier = (_ref = options.windModifier) != null ? _ref : 0;
-      this.ceiling = (_ref1 = options.ceiling) != null ? _ref1 : 20;
-      this.model.on("change:scene", this.render, this);
-      return this.model.on("change:windspeed", function() {
-        this.windSpeed = this.model.get("windspeed");
-        return this.windSpeed += this.windModifier;
-      }, this);
-    };
-
-    Weather.prototype.render = function() {
-      var _ref;
-      if (this.isRendered) {
-        this.$el.html('');
-      }
-      this.width = this.$el.width();
-      this.height = this.$el.height();
-      this.stage = new Kinetic.Stage({
-        container: this.$el.get(0),
-        width: this.width,
-        height: this.height
-      });
-      this.isRendered = true;
-      if ((((_ref = this.options) != null ? _ref.delay : void 0) != null)) {
-        return setTimeout((function(_this) {
-          return function() {
-            return _this.draw();
-          };
-        })(this), this.options.delay);
-      } else {
-        return this.draw();
-      }
-    };
-
-    Weather.prototype.createCloud = function(height, width, x, y) {
-      var cloudCanvas, context, grid, num, size;
-      if (height == null) {
-        height = 3;
-      }
-      if (width == null) {
-        width = 15;
-      }
-      if (x == null) {
-        x = 0;
-      }
-      if (y == null) {
-        y = 0;
-      }
-      size = 23.7;
-      cloudCanvas = document.createElement("canvas");
-      context = cloudCanvas.getContext("2d");
-      cloudCanvas.width = width * size;
-      cloudCanvas.height = height * (size + 20);
-      grid = (function() {
-        var _i, _results;
-        _results = [];
-        for (num = _i = 0; 0 <= height ? _i <= height : _i >= height; num = 0 <= height ? ++_i : --_i) {
-          _results.push((function() {
-            var _j, _results1;
-            _results1 = [];
-            for (num = _j = 0; 0 <= width ? _j <= width : _j >= width; num = 0 <= width ? ++_j : --_j) {
-              _results1.push(Math.round(Math.random()));
-            }
-            return _results1;
-          })());
-        }
-        return _results;
-      })();
-      $cloudgen.drawCloudGroup(context, grid, 40, 40, 25, this.clouds[this.model.get('scene')].color);
-      return new Kinetic.Image({
-        image: cloudCanvas,
-        x: x,
-        y: y,
-        opacity: 0
-      });
-    };
-
-    Weather.prototype.draw = function() {
-      var cloudDensity, layer, segmentSize, x, _i, _results;
-      layer = new Kinetic.Layer();
-      if (this.clouds[this.model.get('scene')].density > 0) {
-        cloudDensity = this.clouds[this.model.get('scene')].density;
-        segmentSize = Math.floor(this.width / cloudDensity);
-        _results = [];
-        for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
-          _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
-        }
-        return _results;
-      }
-    };
-
-    Weather.prototype.drawCloud = function(layer, x, y) {
-      var anim, cloud, cloudWidth;
-      cloud = this.createCloud(3, 15, x, y);
-      this.windSpeed = this.model.get('windspeed');
-      this.windSpeed += this.windModifier;
-      cloudWidth = cloud.getWidth();
-      layer.add(cloud);
-      this.stage.add(layer);
-      cloud.transitionTo({
-        opacity: 1,
-        duration: 3
-      });
-      anim = new Kinetic.Animation({
-        func: (function(_this) {
-          return function(frame) {
-            var pos;
-            pos = cloud.getX() - _this.windSpeed;
-            if ((cloud.getX() + cloudWidth) <= 0) {
-              pos = _this.stage.getWidth() + 10;
-              y = Math.floor(Math.random() * _this.height) - 120;
-              cloud.setY(y);
-            }
-            return cloud.setX(pos);
-          };
-        })(this),
-        node: layer
-      });
-      return anim.start();
-    };
-
-    return Weather;
-
-  })(Backbone.View);
-
-}).call(this);
-(function() {
-  var __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
   sdn.Views.WeatherConditions = (function(_super) {
     __extends(WeatherConditions, _super);
 
@@ -20879,9 +20993,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
       "click .weather-control-panel-button": "changeWeather"
     };
 
-    WeatherConditions.prototype.initialize = function() {
-      return this.listenTo(this.model, "change:conditionText", this.render);
-    };
+    WeatherConditions.prototype.initialize = function() {};
 
     WeatherConditions.prototype.render = function() {
       var item;
@@ -20916,7 +21028,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
       "click": "cancelClose",
       "click .condition": "chooseCondition",
       "click button[data-panel]": "changePanel",
-      "change [name=windSpeed]": "setWind"
+      "change input[name=windSpeed]": "setWind"
     };
 
     WeatherControlPanel.prototype.render = function() {
@@ -20955,7 +21067,9 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
     };
 
     WeatherControlPanel.prototype.selectWind = function() {
-      return this.$el.find("[name=windSpeed]").val(this.model.get("windspeed"));
+      var wind;
+      wind = this.model.get("wind");
+      return this.$el.find("[name=windSpeed]").val(wind.speed);
     };
 
     WeatherControlPanel.prototype.setWind = function(ev) {
@@ -20969,9 +21083,10 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
       item = _.clone(this.model.get("item"));
       this.model.set("conditionCode", code);
       this.model.set("conditionText", text);
-      return this.trigger("controlpanel:changecondition", {
+      this.trigger("controlpanel:changecondition", {
         conditionCode: code
       });
+      return false;
     };
 
     WeatherControlPanel.prototype.changePanel = function(ev) {
@@ -20993,22 +21108,26 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
   _(sdn).extend({
     app: {
       init: function() {
-        var tf, wf;
+        var ff, wf;
         this.weather = new sdn.Models.Weather();
-        this.time = new sdn.Models.Time();
+        this.fog = new sdn.Models.Fog();
         wf = this.weather.fetch();
-        tf = this.time.fetch();
-        return $.when(tf, wf).done((function(_this) {
+        ff = this.fog.fetch();
+        return $.when(ff, wf).done((function(_this) {
           return function() {
-            if (_this.weather.has("item")) {
-              return _this.createWeather();
-            } else {
-              return _this.setDefaultWeather();
+            if (!_this.weather.has("item")) {
+              _this.setDefaultWeather();
             }
+            if (!_this.fog.has("foggy")) {
+              _this.setDefaultFog();
+            }
+            return _this.createWeather();
           };
         })(this)).fail((function(_this) {
           return function() {
-            return _this.setDefaultWeather();
+            _this.setDefaultWeather();
+            _this.setDefaultFog();
+            return _this.createWeather();
           };
         })(this));
       },
@@ -21020,16 +21139,21 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
         }).render();
         new sdn.Views.Weather({
           model: this.weather,
+          ceiling: 40,
           el: $("#weather_midground").get(0),
           delay: 1500,
-          windModifier: .05
+          windModifier: .02
         }).render();
         new sdn.Views.Weather({
           model: this.weather,
-          el: $("#weather_foreground", {
-            delay: 2500,
-            windModifier: .08
-          }).get(0)
+          el: $("#weather_foreground").get(0),
+          delay: 2500,
+          windModifier: .06
+        }).render();
+        new sdn.Views.Fog({
+          model: this.fog,
+          el: $("#fog-front").get(0),
+          windModifier: .08
         }).render();
         new sdn.Views.Haze({
           model: this.weather
@@ -21045,7 +21169,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
           model: this.weather,
           el: $(".weather-conditions").get(0)
         });
-        this.weather.on("change", this.controlPanel.render());
+        this.weather.on("change", this.controlPanel.render, this.controlPanel);
         this.conditions.on("weatherconditions:change", ((function(_this) {
           return function() {
             return _this.controlPanel.show();
@@ -21060,7 +21184,7 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
         })(this)));
       },
       setDefaultWeather: function() {
-        this.weather.set({
+        return this.weather.set({
           item: {
             condition: {
               temp: 68,
@@ -21074,7 +21198,14 @@ Kinetic.Node.addGettersSetters(Kinetic.TextPath, ['fontFamily', 'fontSize', 'fon
           conditionCode: 30,
           conditionText: 'Partly Cloudy'
         });
-        return this.createWeather();
+      },
+      setDefaultFog: function() {
+        return this.fog.set({
+          foggy: "yes",
+          hour: 8,
+          updated_at: "2014-10-15T17:34:07Z",
+          current_hour: 8
+        });
       },
       stageWeather: function() {
         return this.scene = this.getScene();

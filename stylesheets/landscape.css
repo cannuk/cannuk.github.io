@@ -319,14 +319,14 @@
   /* line 303, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
   .postcard #weather_background {
     z-index: 0;
-    height: 360px;
+    height: 290px;
     position: absolute;
     top: 0;
     right: 0;
     left: 0; }
   /* line 312, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
   .postcard #weather_midground {
-    z-index: 20;
+    z-index: 10;
     height: 260px;
     position: absolute;
     top: 0;
@@ -338,5 +338,13 @@
     height: 200px;
     position: absolute;
     top: 0;
+    right: 0;
+    left: 0; }
+  /* line 330, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+  .postcard #fog-front {
+    z-index: 50;
+    top: 220px;
+    position: absolute;
+    height: 260px;
     right: 0;
     left: 0; }

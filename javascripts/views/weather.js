@@ -213,7 +213,7 @@
           g: 255,
           b: 255
         },
-        density: 8
+        density: 4
       },
       "mcloud": {
         color: {
@@ -221,7 +221,7 @@
           g: 255,
           b: 255
         },
-        density: 22
+        density: 10
       },
       "rain": {
         color: {
@@ -229,7 +229,7 @@
           g: 195,
           b: 209
         },
-        density: 35
+        density: 20
       },
       "thunder": {
         color: {
@@ -237,14 +237,15 @@
           g: 195,
           b: 209
         },
-        density: 40
+        density: 28
       }
     };
 
     Weather.prototype.initialize = function(options) {
-      var _ref, _ref1;
+      var _ref, _ref1, _ref2;
       this.windModifier = (_ref = options.windModifier) != null ? _ref : 0;
-      this.ceiling = (_ref1 = options.ceiling) != null ? _ref1 : 20;
+      this.delay = (_ref1 = options.delay) != null ? _ref1 : 0;
+      this.ceiling = (_ref2 = options.ceiling) != null ? _ref2 : 20;
       this.model.on("change:scene", this.render, this);
       return this.model.on("change:windspeed", function() {
         this.windSpeed = this.model.get("windspeed");
@@ -253,7 +254,6 @@
     };
 
     Weather.prototype.render = function() {
-      var _ref;
       if (this.isRendered) {
         this.$el.html('');
       }
@@ -265,12 +265,12 @@
         height: this.height
       });
       this.isRendered = true;
-      if ((((_ref = this.options) != null ? _ref.delay : void 0) != null)) {
+      if (this.delay > 0) {
         return setTimeout((function(_this) {
           return function() {
             return _this.draw();
           };
-        })(this), this.options.delay);
+        })(this), this.delay);
       } else {
         return this.draw();
       }
@@ -324,7 +324,7 @@
       layer = new Kinetic.Layer();
       if (this.clouds[this.model.get('scene')].density > 0) {
         cloudDensity = this.clouds[this.model.get('scene')].density;
-        segmentSize = Math.floor(this.width / cloudDensity);
+        segmentSize = Math.floor((this.width * 2) / cloudDensity);
         _results = [];
         for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
           _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) - 120));
@@ -343,7 +343,7 @@
       this.stage.add(layer);
       cloud.transitionTo({
         opacity: 1,
-        duration: 3
+        duration: 1
       });
       anim = new Kinetic.Animation({
         func: (function(_this) {
