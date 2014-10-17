@@ -14,7 +14,14 @@
       "click": "cancelClose",
       "click .condition": "chooseCondition",
       "click button[data-panel]": "changePanel",
-      "change input[name=windSpeed]": "setWind"
+      "change input[name=windspeed]": "selectWind",
+      "change input[name=hour]": "selectTime"
+    };
+
+    WeatherControlPanel.prototype.initialize = function(options) {
+      this.fogModel = options.fogModel;
+      this.model.on("change:conditionCode", this.setScene, this);
+      return this.fogModel.on("change:foggy", this.selectScene, this);
     };
 
     WeatherControlPanel.prototype.render = function() {
@@ -22,8 +29,9 @@
       this.resetPanels();
       this.$el.find(".row-panel").first().css("display", "block");
       this.$el.find("button[data-panel]").first().addClass("active");
-      this.selectScene();
-      return this.selectWind();
+      this.setScene();
+      this.setWind();
+      return this.setFog();
     };
 
     WeatherControlPanel.prototype.show = function() {
@@ -43,35 +51,74 @@
       return this.$el.find("button[data-panel]").removeClass("active");
     };
 
-    WeatherControlPanel.prototype.cancelClose = function() {
+    WeatherControlPanel.prototype.cancelClose = function(ev) {
+      ev.preventDefault();
       return false;
     };
 
-    WeatherControlPanel.prototype.selectScene = function() {
-      this.$el.find(".condition-wrapper").removeClass("selected");
-      return this.$el.find("[data-scene=" + (this.model.get("scene")) + "]").find(".condition-wrapper").addClass("selected");
+    WeatherControlPanel.prototype.setScene = function() {
+      this.$el.find("[data-scene]").not("[data-scene=fog]").removeClass("selected");
+      return this.$el.find("[data-scene=" + (this.model.get("scene")) + "]").addClass("selected");
     };
 
-    WeatherControlPanel.prototype.selectWind = function() {
+    WeatherControlPanel.prototype.setWind = function() {
       var wind;
       wind = this.model.get("wind");
-      return this.$el.find("[name=windSpeed]").val(wind.speed);
+      this.$el.find("[name=windspeed]").val(wind.speed);
+      return false;
     };
 
-    WeatherControlPanel.prototype.setWind = function(ev) {
-      return this.model.changeWind($(ev.currentTarget).val());
+    WeatherControlPanel.prototype.setTime = function() {
+      this.$el.find("[name=hour]").val(this.fogModel.get("hour"));
+      return false;
+    };
+
+    WeatherControlPanel.prototype.selectWind = function(ev) {
+      this.model.changeWind($(ev.currentTarget).val());
+      ev.preventDefault();
+      return false;
+    };
+
+    WeatherControlPanel.prototype.selectTime = function(ev) {
+      var val;
+      val = $(ev.currentTarget).val();
+      if (val > 23) {
+        val -= 23;
+      }
+      this.fogModel.set("hour", val);
+      ev.preventDefault();
+      return false;
+    };
+
+    WeatherControlPanel.prototype.setFog = function() {
+      if (this.fogModel.get("foggy") !== "no") {
+        return this.$el.find("[data-scene=fog]").addClass("selected");
+      }
+    };
+
+    WeatherControlPanel.prototype.selectFog = function(ev) {
+      var $wrapper;
+      $wrapper = $(ev.currentTarget);
+      if ($wrapper.hasClass('selected')) {
+        this.fogModel.set("foggy", "no");
+        return $wrapper.removeClass("selected");
+      } else {
+        this.fogModel.set("foggy", "yes");
+        return $wrapper.addClass("selected");
+      }
     };
 
     WeatherControlPanel.prototype.chooseCondition = function(ev) {
       var code, item, text;
       code = $(ev.currentTarget).data("condition-code");
-      text = $(ev.currentTarget).data("condition-text");
-      item = _.clone(this.model.get("item"));
-      this.model.set("conditionCode", code);
-      this.model.set("conditionText", text);
-      this.trigger("controlpanel:changecondition", {
-        conditionCode: code
-      });
+      if (code === "fog") {
+        this.selectFog(ev);
+      } else {
+        text = $(ev.currentTarget).data("condition-text");
+        item = _.clone(this.model.get("item"));
+        this.model.set("conditionCode", code);
+        this.model.set("conditionText", text);
+      }
       return false;
     };
 

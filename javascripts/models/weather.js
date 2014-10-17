@@ -82,7 +82,6 @@
       conditionCode = this.get("conditionCode");
       if (conditionCode) {
         code = parseInt(conditionCode);
-        console.log(code);
         scenes = {
           'clear': [32, 31, 33, 34],
           'pcloud': [29, 30, 44],
@@ -117,7 +116,6 @@
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
         windSpeed = (parseInt(wind.speed)) * .012;
-        console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed
         });

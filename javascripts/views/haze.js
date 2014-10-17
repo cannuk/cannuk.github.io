@@ -40,7 +40,6 @@
     Haze.prototype.render = function() {
       var scene;
       scene = this.model.get("scene");
-      console.log(scene);
       if (!!scene) {
         return this.$el.removeClass().addClass(this.css[scene]);
       }

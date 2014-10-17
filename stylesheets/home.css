@@ -1,14 +1,14 @@
-/* line 6, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 7, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 body {
   background-color: #E14B3B;
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-weight: 300; }
-  /* line 12, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 13, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   body .introduction {
     margin-top: 40px;
     font-size: 40px; }
-    /* line 17, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 18, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     body .introduction .highlight {
       color: #f9dbd7;
       font-weight: 900; }

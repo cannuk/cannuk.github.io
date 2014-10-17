@@ -112,7 +112,6 @@
       conditionCode = this.get("conditionCode");
       if (conditionCode) {
         code = parseInt(conditionCode);
-        console.log(code);
         scenes = {
           'clear': [32, 31, 33, 34],
           'pcloud': [29, 30, 44],
@@ -147,7 +146,6 @@
       windSpeed = .1;
       if ((wind != null) && (wind.speed != null)) {
         windSpeed = (parseInt(wind.speed)) * .012;
-        console.log("windspeed is " + windSpeed);
         return this.set({
           windspeed: windSpeed
         });
@@ -524,10 +522,12 @@
       return Fog.__super__.constructor.apply(this, arguments);
     }
 
+    Fog.prototype.initialize = function(options) {
+      this.model.on("change:foggy", this.toggle, this);
+      return Fog.__super__.initialize.call(this, options);
+    };
+
     Fog.prototype.render = function() {
-      if (this.isRendered) {
-        this.$el.html('');
-      }
       this.width = this.$el.width();
       this.height = this.$el.height();
       this.stage = new Kinetic.Stage({
@@ -535,10 +535,8 @@
         width: this.width,
         height: this.height
       });
-      this.isRendered = true;
-      if (this.model.get("foggy") === "yes" || this.model.get("foggy") === "probably") {
-        return this.draw();
-      }
+      this.draw();
+      return this.toggle();
     };
 
     Fog.prototype.createCloud = function(height, width, x, y) {
@@ -588,26 +586,43 @@
       });
     };
 
+    Fog.prototype.show = function() {
+      return this.layer.show();
+    };
+
+    Fog.prototype.hide = function() {
+      return this.layer.hide();
+    };
+
+    Fog.prototype.toggle = function() {
+      if (this.model.get("foggy") === "no") {
+        return this.hide();
+      } else {
+        return this.show();
+      }
+    };
+
     Fog.prototype.draw = function() {
-      var cloudDensity, layer, segmentSize, x, _i, _results;
-      layer = new Kinetic.Layer();
-      cloudDensity = 30;
+      var cloudDensity, segmentSize, x, _i, _results;
+      this.layer = new Kinetic.Layer();
+      this.layer.visible = false;
+      cloudDensity = 20;
       segmentSize = Math.floor((this.width * 2) / cloudDensity);
       _results = [];
       for (x = _i = 0; 0 <= cloudDensity ? _i <= cloudDensity : _i >= cloudDensity; x = 0 <= cloudDensity ? ++_i : --_i) {
-        _results.push(this.drawCloud(layer, Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) + 10));
+        _results.push(this.drawCloud(Math.floor(Math.random() * (x * segmentSize)), Math.floor(Math.random() * this.height) + 10));
       }
       return _results;
     };
 
-    Fog.prototype.drawCloud = function(layer, x, y) {
+    Fog.prototype.drawCloud = function(x, y) {
       var anim, cloud, cloudWidth;
       cloud = this.createCloud(10, 25, x, y);
       this.windSpeed = 0;
       this.windSpeed += this.windModifier;
       cloudWidth = cloud.getWidth();
-      layer.add(cloud);
-      this.stage.add(layer);
+      this.layer.add(cloud);
+      this.stage.add(this.layer);
       cloud.transitionTo({
         opacity: .6,
         duration: 2
@@ -623,7 +638,7 @@
             return cloud.setX(pos);
           };
         })(this),
-        node: layer
+        node: this.layer
       });
       return anim.start();
     };
@@ -659,7 +674,6 @@
     Haze.prototype.render = function() {
       var scene;
       scene = this.model.get("scene");
-      console.log(scene);
       if (!!scene) {
         return this.$el.removeClass().addClass(this.css[scene]);
       }
@@ -820,7 +834,14 @@
       "click": "cancelClose",
       "click .condition": "chooseCondition",
       "click button[data-panel]": "changePanel",
-      "change input[name=windSpeed]": "setWind"
+      "change input[name=windspeed]": "selectWind",
+      "change input[name=hour]": "selectTime"
+    };
+
+    WeatherControlPanel.prototype.initialize = function(options) {
+      this.fogModel = options.fogModel;
+      this.model.on("change:conditionCode", this.setScene, this);
+      return this.fogModel.on("change:foggy", this.selectScene, this);
     };
 
     WeatherControlPanel.prototype.render = function() {
@@ -828,8 +849,9 @@
       this.resetPanels();
       this.$el.find(".row-panel").first().css("display", "block");
       this.$el.find("button[data-panel]").first().addClass("active");
-      this.selectScene();
-      return this.selectWind();
+      this.setScene();
+      this.setWind();
+      return this.setFog();
     };
 
     WeatherControlPanel.prototype.show = function() {
@@ -849,35 +871,74 @@
       return this.$el.find("button[data-panel]").removeClass("active");
     };
 
-    WeatherControlPanel.prototype.cancelClose = function() {
+    WeatherControlPanel.prototype.cancelClose = function(ev) {
+      ev.preventDefault();
       return false;
     };
 
-    WeatherControlPanel.prototype.selectScene = function() {
-      this.$el.find(".condition-wrapper").removeClass("selected");
-      return this.$el.find("[data-scene=" + (this.model.get("scene")) + "]").find(".condition-wrapper").addClass("selected");
+    WeatherControlPanel.prototype.setScene = function() {
+      this.$el.find("[data-scene]").not("[data-scene=fog]").removeClass("selected");
+      return this.$el.find("[data-scene=" + (this.model.get("scene")) + "]").addClass("selected");
     };
 
-    WeatherControlPanel.prototype.selectWind = function() {
+    WeatherControlPanel.prototype.setWind = function() {
       var wind;
       wind = this.model.get("wind");
-      return this.$el.find("[name=windSpeed]").val(wind.speed);
+      this.$el.find("[name=windspeed]").val(wind.speed);
+      return false;
     };
 
-    WeatherControlPanel.prototype.setWind = function(ev) {
-      return this.model.changeWind($(ev.currentTarget).val());
+    WeatherControlPanel.prototype.setTime = function() {
+      this.$el.find("[name=hour]").val(this.fogModel.get("hour"));
+      return false;
+    };
+
+    WeatherControlPanel.prototype.selectWind = function(ev) {
+      this.model.changeWind($(ev.currentTarget).val());
+      ev.preventDefault();
+      return false;
+    };
+
+    WeatherControlPanel.prototype.selectTime = function(ev) {
+      var val;
+      val = $(ev.currentTarget).val();
+      if (val > 23) {
+        val -= 23;
+      }
+      this.fogModel.set("hour", val);
+      ev.preventDefault();
+      return false;
+    };
+
+    WeatherControlPanel.prototype.setFog = function() {
+      if (this.fogModel.get("foggy") !== "no") {
+        return this.$el.find("[data-scene=fog]").addClass("selected");
+      }
+    };
+
+    WeatherControlPanel.prototype.selectFog = function(ev) {
+      var $wrapper;
+      $wrapper = $(ev.currentTarget);
+      if ($wrapper.hasClass('selected')) {
+        this.fogModel.set("foggy", "no");
+        return $wrapper.removeClass("selected");
+      } else {
+        this.fogModel.set("foggy", "yes");
+        return $wrapper.addClass("selected");
+      }
     };
 
     WeatherControlPanel.prototype.chooseCondition = function(ev) {
       var code, item, text;
       code = $(ev.currentTarget).data("condition-code");
-      text = $(ev.currentTarget).data("condition-text");
-      item = _.clone(this.model.get("item"));
-      this.model.set("conditionCode", code);
-      this.model.set("conditionText", text);
-      this.trigger("controlpanel:changecondition", {
-        conditionCode: code
-      });
+      if (code === "fog") {
+        this.selectFog(ev);
+      } else {
+        text = $(ev.currentTarget).data("condition-text");
+        item = _.clone(this.model.get("item"));
+        this.model.set("conditionCode", code);
+        this.model.set("conditionText", text);
+      }
       return false;
     };
 
@@ -905,6 +966,7 @@
         this.fog = new sdn.Models.Fog();
         wf = this.weather.fetch();
         ff = this.fog.fetch();
+        this.fog.on("change:hour", this.setTime, this);
         return $.when(ff, wf).done((function(_this) {
           return function() {
             if (!_this.weather.has("item")) {
@@ -913,13 +975,15 @@
             if (!_this.fog.has("foggy")) {
               _this.setDefaultFog();
             }
-            return _this.createWeather();
+            _this.createWeather();
+            return _this.setTime();
           };
         })(this)).fail((function(_this) {
           return function() {
             _this.setDefaultWeather();
             _this.setDefaultFog();
-            return _this.createWeather();
+            _this.createWeather();
+            return _this.setTime();
           };
         })(this));
       },
@@ -955,13 +1019,13 @@
         }).render();
         this.controlPanel = new sdn.Views.WeatherControlPanel({
           model: this.weather,
+          fogModel: this.fog,
           el: $(".weather-control-panel").get(0)
         });
         this.conditions = new sdn.Views.WeatherConditions({
           model: this.weather,
           el: $(".weather-conditions").get(0)
         });
-        this.weather.on("change", this.controlPanel.render, this.controlPanel);
         this.conditions.on("weatherconditions:change", ((function(_this) {
           return function() {
             return _this.controlPanel.show();
@@ -974,6 +1038,13 @@
             return _this.controlPanel.hide();
           };
         })(this)));
+      },
+      setTime: function() {
+        var hour, hourOpacity;
+        hour = this.fog.get("hour");
+        $("#sky").removeClass().addClass("sky-gradient-" + hour);
+        hourOpacity = [.7, .7, .7, .7, .8, .9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, .9, .8, .7, .7, .7];
+        return $(".postcard").css("opacity", hourOpacity[hour]);
       },
       setDefaultWeather: function() {
         return this.weather.set({
@@ -994,9 +1065,8 @@
       setDefaultFog: function() {
         return this.fog.set({
           foggy: "yes",
-          hour: 8,
-          updated_at: "2014-10-15T17:34:07Z",
-          current_hour: 8
+          hour: 5,
+          updated_at: "2014-10-15T17:34:07Z"
         });
       },
       stageWeather: function() {
