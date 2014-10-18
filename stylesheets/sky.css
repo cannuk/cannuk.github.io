@@ -1,0 +1,193 @@
+/* line 3, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+#sky {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  height: 260px;
+  -webkit-transition: all .4s ease-out;
+  -moz-transition: all .4s ease-out;
+  -ms-transition: all .4s ease-out;
+  -o-transition: all .4s ease-out;
+  transition: all .4s ease-out; }
+
+/* line 15, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-default {
+  background: #5487c5;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5487c5), color-stop(73%, #9ac5e3));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #5487c5 0%, #9ac5e3 73%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%);
+  /* W3C */ }
+
+/* line 24, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-0, .sky-gradient-24 {
+  background: #00000c; }
+
+/* line 25, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-1 {
+  background: linear-gradient(to bottom, #020111 85%, #191621 100%); }
+
+/* line 26, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-2 {
+  background: linear-gradient(to bottom, #020111 60%, #20202c 100%); }
+
+/* line 27, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-3 {
+  background: linear-gradient(to bottom, #020111 10%, #3a3a52 100%); }
+
+/* line 28, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-4 {
+  background: linear-gradient(to bottom, #20202c 0%, #515175 100%); }
+
+/* line 29, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-5 {
+  background: linear-gradient(to bottom, #40405c 0%, #6f71aa 80%, #8a76ab 100%); }
+
+/* line 30, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-6 {
+  background: linear-gradient(to bottom, #4a4969 0%, #7072ab 50%, #cd82a0 100%); }
+
+/* line 31, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-7 {
+  background: linear-gradient(to bottom, #757abf 0%, #8583be 60%, #eab0d1 100%); }
+
+/* line 32, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-8 {
+  background: linear-gradient(to bottom, #82addb 0%, #ebb2b1 100%); }
+
+/* line 33, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-9 {
+  background: linear-gradient(to bottom, #94c5f8 1%, #a6e6ff 70%, #b1b5ea 100%); }
+
+/* line 34, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-10 {
+  background: linear-gradient(to bottom, #b7eaff 0%, #94dfff 100%); }
+
+/* line 35, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-11 {
+  background: linear-gradient(to bottom, #9be2fe 0%, #67d1fb 100%); }
+
+/* line 36, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-12 {
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%); }
+
+/* line 37, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-13 {
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%); }
+
+/* line 38, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-14 {
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%); }
+
+/* line 39, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-15 {
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%); }
+
+/* line 40, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-16 {
+  background: linear-gradient(to bottom, #5487c5 0%, #9ac5e3 73%); }
+
+/* line 41, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-17 {
+  background: linear-gradient(to bottom, #1e528e 0%, #728a7c 50%, #e9ce5d 100%); }
+
+/* line 42, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-18 {
+  background: linear-gradient(to bottom, #154277 0%, #576e71 30%, #e1c45e 70%, #b26339 100%); }
+
+/* line 43, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-19 {
+  background: linear-gradient(to bottom, #163C52 0%, #4F4F47 30%, #C5752D 60%, #B7490F 80%, #2F1107 100%); }
+
+/* line 44, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-20 {
+  background: linear-gradient(to bottom, #071B26 0%, #071B26 30%, #8A3B12 80%, #240E03 100%); }
+
+/* line 45, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-21 {
+  background: linear-gradient(to bottom, #090401 50%, #4B1D06 100%); }
+
+/* line 46, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-22 {
+  background: linear-gradient(to bottom, #00000c 80%, #150800 100%); }
+
+/* line 47, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+.sky-gradient-23 {
+  background: linear-gradient(to bottom, #00000c 80%, #150800 100%); }
+
+/* line 50, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+#haze {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  height: 260px; }
+
+/* line 58, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+#haze.mostly-cloudy {
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #efefef 31%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(31%, #efefef));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffffff 0%, #efefef 31%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffffff 0%, #efefef 31%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffffff 0%, #efefef 31%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #ffffff 0%, #efefef 31%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=0 );
+  /* IE6-9 */
+  opacity: .8; }
+
+/* line 70, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+#haze.raining, #haze.stormy {
+  background: #bec3d1;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bec3d1), color-stop(91%, #8f909e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #bec3d1 0%, #8f909e 91%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bec3d1', endColorstr='#8f909e',GradientType=0 );
+  /* IE6-9 */
+  opacity: .8; }
+
+/* line 84, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/sky.css.scss */
+#haze.stormy {
+  background: #bec3d1;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bec3d1), color-stop(91%, #8f909e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #bec3d1 0%, #8f909e 91%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #bec3d1 0%, #8f909e 91%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bec3d1', endColorstr='#8f909e',GradientType=0 );
+  /* IE6-9 */
+  opacity: .8; }
