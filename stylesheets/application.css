@@ -7307,17 +7307,16 @@ body {
     font-size: 30px; }
     /* line 18, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     body .introduction .highlight {
-      color: #f9dbd7;
-      font-weight: 900; }
+      color: #f9dbd7; }
 
-/* line 27, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 26, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .postcard-background {
   background-color: #333;
-  border-bottom: 15px solid #FFF;
+  border-bottom: 10px solid #FFF;
   -webkit-box-shadow: 1px 1px 1px 1px rgba(106, 39, 34, 0.6);
   box-shadow: -1px 1px 1px 1px rgba(106, 39, 34, 0.6);
   position: relative; }
-  /* line 33, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 32, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .postcard-background .weather-conditions {
     z-index: 2000;
     position: absolute;
@@ -7326,23 +7325,23 @@ body {
     padding: 5px 10px;
     text-align: center;
     color: #FFF; }
-    /* line 41, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 40, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1 {
       font-size: 65px;
       margin: 0 auto;
       font-weight: 100; }
-    /* line 47, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 46, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1::after {
       content: "\00b0";
       position: relative;
       vertical-align: super;
       font-size: 30px;
       font-weight: 100; }
-    /* line 54, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 53, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1, .postcard-background .weather-conditions .conditions {
       text-shadow: 0 1px 2px #1D5987; }
 
-/* line 60, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 59, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .postcard {
   position: relative;
   overflow: hidden;
@@ -7350,12 +7349,13 @@ body {
   left: 0;
   right: 0;
   top: 0; }
-  /* line 70, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 69, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .postcard.night {
     opacity: .7; }
 
-/* line 76, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 75, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .weather-control-panel {
+  pointer-events: none;
   max-height: 0;
   background: #ca2f1f;
   overflow: hidden;
@@ -7369,57 +7369,58 @@ body {
   transition: max-height .3s ease-out; }
   /* line 89, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel.visible {
+    pointer-events: auto;
     max-height: 2000px;
     -webkit-transition: max-height .3s ease-in;
     -moz-transition: max-height .3s ease-in;
     -ms-transition: max-height .3s ease-in;
     -o-transition: max-height .3s ease-in;
     transition: max-height .3s ease-in; }
-  /* line 98, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 99, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .row-panel {
     margin: 40px auto; }
-  /* line 102, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 103, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .controls-button-wrapper {
     margin: 0 auto;
     text-align: center; }
-  /* line 107, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 108, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .controls-button-group {
     margin: 25px auto;
     text-align: center; }
-    /* line 110, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 111, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .controls-button-group .btn {
       border: 1px solid #810000;
       color: #810000;
       background: transparent; }
-      /* line 115, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      /* line 116, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
       .weather-control-panel .controls-button-group .btn:active {
         background-color: #bd2c1d; }
-  /* line 122, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 123, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .condition {
     display: inline-block;
     margin-bottom: 10px;
     text-align: center; }
-    /* line 127, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 128, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition .condition-wrapper {
       border-radius: 4px 4px 2px 2px;
       color: #810000;
       padding: 15px 0 5px;
       border: 1px solid transparent; }
-      /* line 132, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      /* line 133, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
       .weather-control-panel .condition .condition-wrapper .meteocon {
         font-size: 60px;
         line-height: 50px;
         text-align: center;
         display: block; }
-    /* line 142, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 143, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition.selected .condition-wrapper {
       border: 1px solid #810000; }
-    /* line 147, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 148, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition:hover .condition-wrapper, .weather-control-panel .condition.selected .condition-wrapper {
       color: #FFF;
       background-color: #bd2c1d; }
 
-/* line 159, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 160, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .weather-control-panel-button {
   border: 1px solid #FFF;
   background: rgba(255, 255, 255, 0.1);
@@ -7430,16 +7431,86 @@ body {
   outline: none;
   box-shadow: 0 0px 2px #1D5987;
   text-shadow: 0 1px 2px #1D5987; }
-  /* line 170, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 171, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel-button:hover {
     box-shadow: 0 0px 5px #1D5987;
     text-shadow: 1px 1px 5px #1D5987; }
-  /* line 174, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 175, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel-button:active {
     box-shadow: 0 0px 1px #1D5987;
     text-shadow: 0px 0px 1px #1D5987; }
 
-/* line 183, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 185, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .introduction p {
+  margin-bottom: 30px; }
+/* line 188, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .introduction h2 {
+  padding: 10px 0;
+  color: #f9dbd7;
+  border-bottom: 1px solid #ca2f1f;
+  margin-bottom: 30px; }
+/* line 196, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .examples {
+  margin-bottom: 40px; }
+  /* line 198, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example {
+    border-radius: 4px 4px 2px 2px;
+    margin-bottom: 40px;
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(129, 0, 0, 0.8);
+    box-shadow: 0px 0px 2px 0px rgba(129, 0, 0, 0.8); }
+    /* line 204, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    .content-container .examples .example .screenshot {
+      background-color: #FFF;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 200px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      border-bottom: 1px solid #EFEFEF; }
+      /* line 213, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .screenshot a {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0; }
+    /* line 221, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    .content-container .examples .example .description {
+      background-color: #FFF;
+      border-radius: 0 0 4px 4px;
+      padding: 8px; }
+      /* line 222, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description h5 {
+        font-weight: bold; }
+      /* line 228, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description p {
+        height: 80px; }
+      /* line 231, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description .links {
+        padding: 30px;
+        text-align: center; }
+        /* line 234, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+        .content-container .examples .example .description .links a {
+          color: #ca2f1f; }
+  /* line 242, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.foggy .screenshot {
+    background-image: url(/images/foggy.png); }
+  /* line 248, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.numbers .screenshot {
+    background-image: url(/images/magicnumbers.png); }
+  /* line 254, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.dash .screenshot {
+    background-image: url(/images/bart-dash.png); }
+/* line 262, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .social .social-wrapper {
+  margin: 20px 0px 40px 0px;
+  font-size: 70px;
+  text-align: center; }
+  /* line 266, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .social .social-wrapper p {
+    font-size: 24px; }
+
+/* line 278, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range] {
   margin-top: 45px;
   /*removes default webkit styles*/
@@ -7448,14 +7519,14 @@ input[type=range] {
   border: 1px solid #CA2F1F;
   background: #BD2C1D; }
 
-/* line 193, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 288, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-webkit-slider-runnable-track {
   height: 5px;
   background: #BD2C1D;
   border: none;
   border-radius: 3px; }
 
-/* line 199, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 294, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -7465,22 +7536,22 @@ input[type=range]::-webkit-slider-thumb {
   background: #810000;
   margin-top: -4px; }
 
-/* line 208, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 303, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus {
   outline: none; }
 
-/* line 211, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 306, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #BD2C1D; }
 
-/* line 215, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 310, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-moz-range-track {
   height: 5px;
   background: #BD2C1D;
   border: none;
   border-radius: 3px; }
 
-/* line 221, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 316, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-moz-range-thumb {
   border: none;
   height: 16px;
@@ -7489,12 +7560,12 @@ input[type=range]::-moz-range-thumb {
   background: #810000; }
 
 /*hide the outline behind the border*/
-/* line 230, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 325, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:-moz-focusring {
   outline: 1px solid white;
   outline-offset: -1px; }
 
-/* line 235, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 330, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-track {
   height: 5px;
   /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
@@ -7505,17 +7576,17 @@ input[type=range]::-ms-track {
   /*remove default tick marks*/
   color: transparent; }
 
-/* line 248, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 343, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-fill-lower {
   background: #777;
   border-radius: 10px; }
 
-/* line 252, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 347, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-fill-upper {
   background: #BD2C1D;
   border-radius: 10px; }
 
-/* line 256, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 351, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-thumb {
   border: none;
   height: 16px;
@@ -7523,11 +7594,11 @@ input[type=range]::-ms-thumb {
   border-radius: 50%;
   background: #810000; }
 
-/* line 263, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 358, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-ms-fill-lower {
   background: #BD2C1D; }
 
-/* line 266, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 361, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-ms-fill-upper {
   background: #ccc; }
 
@@ -7678,23 +7749,47 @@ input[type=range]:focus::-ms-fill-upper {
 #skyline {
   background: url(/images/skyline.png) no-repeat;
   position: absolute;
-  left: 40px;
-  top: 255px;
-  width: 100px;
-  height: 40px;
+  left: 50px;
+  top: 265px;
+  width: 120px;
+  height: 60px;
   z-index: 31;
   background-size: contain; }
 
 /* line 138, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+#skyline-front {
+  background: url(/images/skyline2.png) no-repeat;
+  position: absolute;
+  left: 40px;
+  top: 255px;
+  width: 120px;
+  height: 60px;
+  z-index: 31;
+  background-size: contain; }
+
+/* line 149, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #city {
   position: absolute;
+  background: url(/images/city.png) no-repeat;
   left: -5px;
-  top: 265px;
-  width: 700px;
-  height: 391px;
-  z-index: 29; }
+  top: 276px;
+  width: 350px;
+  height: 120px;
+  z-index: 29;
+  background-size: contain; }
 
-/* line 147, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 160, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+#city2 {
+  position: absolute;
+  background: url(/images/city.png) no-repeat;
+  left: 45px;
+  top: 285px;
+  width: 350px;
+  height: 120px;
+  z-index: 29;
+  background-size: contain; }
+
+/* line 171, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #headland {
   background: url(/images/headland.png) no-repeat;
   position: absolute;
@@ -7704,17 +7799,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 391px;
   z-index: 30; }
 
-/* line 157, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
-#beach {
-  background: url(/images/beach.png) no-repeat;
-  position: absolute;
-  left: 218px;
-  top: 371px;
-  width: 700px;
-  height: 391px;
-  z-index: 35; }
-
-/* line 167, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 181, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #headland-cliff {
   position: absolute;
   left: 626px;
@@ -7723,7 +7808,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 75px;
   z-index: 40; }
 
-/* line 176, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 190, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #bridge {
   background: url(/images/gg2.png) no-repeat;
   position: absolute;
@@ -7734,7 +7819,7 @@ input[type=range]:focus::-ms-fill-upper {
   z-index: 45;
   background-size: contain; }
 
-/* line 187, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 201, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_background {
   z-index: 0;
   height: 290px;
@@ -7743,7 +7828,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 196, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 210, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_midground {
   z-index: 10;
   height: 260px;
@@ -7752,7 +7837,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 205, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 219, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_foreground {
   z-index: 50;
   height: 200px;
@@ -7761,7 +7846,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 214, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 228, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #fog-front {
   z-index: 50;
   top: 220px;
@@ -7982,6 +8067,12 @@ a {
   a:hover {
     color: #bd2c1d;
     text-decoration: none; }
+
+/* line 20, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/all.css.scss */
+footer {
+  color: #810000;
+  padding: 45px;
+  text-align: center; }
 /*!
  * Bootstrap v3.1.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
@@ -13781,17 +13872,16 @@ body {
     font-size: 30px; }
     /* line 18, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     body .introduction .highlight {
-      color: #f9dbd7;
-      font-weight: 900; }
+      color: #f9dbd7; }
 
-/* line 27, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 26, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .postcard-background {
   background-color: #333;
-  border-bottom: 15px solid #FFF;
+  border-bottom: 10px solid #FFF;
   -webkit-box-shadow: 1px 1px 1px 1px rgba(106, 39, 34, 0.6);
   box-shadow: -1px 1px 1px 1px rgba(106, 39, 34, 0.6);
   position: relative; }
-  /* line 33, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 32, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .postcard-background .weather-conditions {
     z-index: 2000;
     position: absolute;
@@ -13800,23 +13890,23 @@ body {
     padding: 5px 10px;
     text-align: center;
     color: #FFF; }
-    /* line 41, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 40, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1 {
       font-size: 65px;
       margin: 0 auto;
       font-weight: 100; }
-    /* line 47, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 46, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1::after {
       content: "\00b0";
       position: relative;
       vertical-align: super;
       font-size: 30px;
       font-weight: 100; }
-    /* line 54, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 53, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .postcard-background .weather-conditions h1, .postcard-background .weather-conditions .conditions {
       text-shadow: 0 1px 2px #1D5987; }
 
-/* line 60, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 59, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .postcard {
   position: relative;
   overflow: hidden;
@@ -13824,12 +13914,13 @@ body {
   left: 0;
   right: 0;
   top: 0; }
-  /* line 70, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 69, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .postcard.night {
     opacity: .7; }
 
-/* line 76, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 75, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .weather-control-panel {
+  pointer-events: none;
   max-height: 0;
   background: #ca2f1f;
   overflow: hidden;
@@ -13843,57 +13934,58 @@ body {
   transition: max-height .3s ease-out; }
   /* line 89, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel.visible {
+    pointer-events: auto;
     max-height: 2000px;
     -webkit-transition: max-height .3s ease-in;
     -moz-transition: max-height .3s ease-in;
     -ms-transition: max-height .3s ease-in;
     -o-transition: max-height .3s ease-in;
     transition: max-height .3s ease-in; }
-  /* line 98, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 99, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .row-panel {
     margin: 40px auto; }
-  /* line 102, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 103, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .controls-button-wrapper {
     margin: 0 auto;
     text-align: center; }
-  /* line 107, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 108, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .controls-button-group {
     margin: 25px auto;
     text-align: center; }
-    /* line 110, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 111, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .controls-button-group .btn {
       border: 1px solid #810000;
       color: #810000;
       background: transparent; }
-      /* line 115, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      /* line 116, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
       .weather-control-panel .controls-button-group .btn:active {
         background-color: #bd2c1d; }
-  /* line 122, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 123, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel .condition {
     display: inline-block;
     margin-bottom: 10px;
     text-align: center; }
-    /* line 127, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 128, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition .condition-wrapper {
       border-radius: 4px 4px 2px 2px;
       color: #810000;
       padding: 15px 0 5px;
       border: 1px solid transparent; }
-      /* line 132, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      /* line 133, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
       .weather-control-panel .condition .condition-wrapper .meteocon {
         font-size: 60px;
         line-height: 50px;
         text-align: center;
         display: block; }
-    /* line 142, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 143, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition.selected .condition-wrapper {
       border: 1px solid #810000; }
-    /* line 147, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    /* line 148, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
     .weather-control-panel .condition:hover .condition-wrapper, .weather-control-panel .condition.selected .condition-wrapper {
       color: #FFF;
       background-color: #bd2c1d; }
 
-/* line 159, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 160, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 .weather-control-panel-button {
   border: 1px solid #FFF;
   background: rgba(255, 255, 255, 0.1);
@@ -13904,16 +13996,86 @@ body {
   outline: none;
   box-shadow: 0 0px 2px #1D5987;
   text-shadow: 0 1px 2px #1D5987; }
-  /* line 170, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 171, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel-button:hover {
     box-shadow: 0 0px 5px #1D5987;
     text-shadow: 1px 1px 5px #1D5987; }
-  /* line 174, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  /* line 175, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
   .weather-control-panel-button:active {
     box-shadow: 0 0px 1px #1D5987;
     text-shadow: 0px 0px 1px #1D5987; }
 
-/* line 183, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 185, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .introduction p {
+  margin-bottom: 30px; }
+/* line 188, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .introduction h2 {
+  padding: 10px 0;
+  color: #f9dbd7;
+  border-bottom: 1px solid #ca2f1f;
+  margin-bottom: 30px; }
+/* line 196, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .examples {
+  margin-bottom: 40px; }
+  /* line 198, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example {
+    border-radius: 4px 4px 2px 2px;
+    margin-bottom: 40px;
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(129, 0, 0, 0.8);
+    box-shadow: 0px 0px 2px 0px rgba(129, 0, 0, 0.8); }
+    /* line 204, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    .content-container .examples .example .screenshot {
+      background-color: #FFF;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 200px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      border-bottom: 1px solid #EFEFEF; }
+      /* line 213, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .screenshot a {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0; }
+    /* line 221, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+    .content-container .examples .example .description {
+      background-color: #FFF;
+      border-radius: 0 0 4px 4px;
+      padding: 8px; }
+      /* line 222, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description h5 {
+        font-weight: bold; }
+      /* line 228, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description p {
+        height: 80px; }
+      /* line 231, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+      .content-container .examples .example .description .links {
+        padding: 30px;
+        text-align: center; }
+        /* line 234, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+        .content-container .examples .example .description .links a {
+          color: #ca2f1f; }
+  /* line 242, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.foggy .screenshot {
+    background-image: url(/images/foggy.png); }
+  /* line 248, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.numbers .screenshot {
+    background-image: url(/images/magicnumbers.png); }
+  /* line 254, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .examples .example.dash .screenshot {
+    background-image: url(/images/bart-dash.png); }
+/* line 262, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+.content-container .social .social-wrapper {
+  margin: 20px 0px 40px 0px;
+  font-size: 70px;
+  text-align: center; }
+  /* line 266, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+  .content-container .social .social-wrapper p {
+    font-size: 24px; }
+
+/* line 278, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range] {
   margin-top: 45px;
   /*removes default webkit styles*/
@@ -13922,14 +14084,14 @@ input[type=range] {
   border: 1px solid #CA2F1F;
   background: #BD2C1D; }
 
-/* line 193, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 288, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-webkit-slider-runnable-track {
   height: 5px;
   background: #BD2C1D;
   border: none;
   border-radius: 3px; }
 
-/* line 199, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 294, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -13939,22 +14101,22 @@ input[type=range]::-webkit-slider-thumb {
   background: #810000;
   margin-top: -4px; }
 
-/* line 208, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 303, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus {
   outline: none; }
 
-/* line 211, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 306, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #BD2C1D; }
 
-/* line 215, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 310, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-moz-range-track {
   height: 5px;
   background: #BD2C1D;
   border: none;
   border-radius: 3px; }
 
-/* line 221, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 316, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-moz-range-thumb {
   border: none;
   height: 16px;
@@ -13963,12 +14125,12 @@ input[type=range]::-moz-range-thumb {
   background: #810000; }
 
 /*hide the outline behind the border*/
-/* line 230, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 325, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:-moz-focusring {
   outline: 1px solid white;
   outline-offset: -1px; }
 
-/* line 235, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 330, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-track {
   height: 5px;
   /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
@@ -13979,17 +14141,17 @@ input[type=range]::-ms-track {
   /*remove default tick marks*/
   color: transparent; }
 
-/* line 248, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 343, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-fill-lower {
   background: #777;
   border-radius: 10px; }
 
-/* line 252, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 347, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-fill-upper {
   background: #BD2C1D;
   border-radius: 10px; }
 
-/* line 256, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 351, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]::-ms-thumb {
   border: none;
   height: 16px;
@@ -13997,11 +14159,11 @@ input[type=range]::-ms-thumb {
   border-radius: 50%;
   background: #810000; }
 
-/* line 263, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 358, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-ms-fill-lower {
   background: #BD2C1D; }
 
-/* line 266, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
+/* line 361, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/home.css.scss */
 input[type=range]:focus::-ms-fill-upper {
   background: #ccc; }
 /* line 2, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
@@ -14151,23 +14313,47 @@ input[type=range]:focus::-ms-fill-upper {
 #skyline {
   background: url(/images/skyline.png) no-repeat;
   position: absolute;
-  left: 40px;
-  top: 255px;
-  width: 100px;
-  height: 40px;
+  left: 50px;
+  top: 265px;
+  width: 120px;
+  height: 60px;
   z-index: 31;
   background-size: contain; }
 
 /* line 138, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+#skyline-front {
+  background: url(/images/skyline2.png) no-repeat;
+  position: absolute;
+  left: 40px;
+  top: 255px;
+  width: 120px;
+  height: 60px;
+  z-index: 31;
+  background-size: contain; }
+
+/* line 149, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #city {
   position: absolute;
+  background: url(/images/city.png) no-repeat;
   left: -5px;
-  top: 265px;
-  width: 700px;
-  height: 391px;
-  z-index: 29; }
+  top: 276px;
+  width: 350px;
+  height: 120px;
+  z-index: 29;
+  background-size: contain; }
 
-/* line 147, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 160, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+#city2 {
+  position: absolute;
+  background: url(/images/city.png) no-repeat;
+  left: 45px;
+  top: 285px;
+  width: 350px;
+  height: 120px;
+  z-index: 29;
+  background-size: contain; }
+
+/* line 171, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #headland {
   background: url(/images/headland.png) no-repeat;
   position: absolute;
@@ -14177,17 +14363,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 391px;
   z-index: 30; }
 
-/* line 157, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
-#beach {
-  background: url(/images/beach.png) no-repeat;
-  position: absolute;
-  left: 218px;
-  top: 371px;
-  width: 700px;
-  height: 391px;
-  z-index: 35; }
-
-/* line 167, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 181, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #headland-cliff {
   position: absolute;
   left: 626px;
@@ -14196,7 +14372,7 @@ input[type=range]:focus::-ms-fill-upper {
   height: 75px;
   z-index: 40; }
 
-/* line 176, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 190, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #bridge {
   background: url(/images/gg2.png) no-repeat;
   position: absolute;
@@ -14207,7 +14383,7 @@ input[type=range]:focus::-ms-fill-upper {
   z-index: 45;
   background-size: contain; }
 
-/* line 187, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 201, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_background {
   z-index: 0;
   height: 290px;
@@ -14216,7 +14392,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 196, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 210, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_midground {
   z-index: 10;
   height: 260px;
@@ -14225,7 +14401,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 205, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 219, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #weather_foreground {
   z-index: 50;
   height: 200px;
@@ -14234,7 +14410,7 @@ input[type=range]:focus::-ms-fill-upper {
   right: 0;
   left: 0; }
 
-/* line 214, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
+/* line 228, /Users/sean/Development/cannuk/middleman/personal-site-static/source/stylesheets/landscape.css.scss */
 #fog-front {
   z-index: 50;
   top: 220px;

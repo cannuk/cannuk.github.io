@@ -862,8 +862,7 @@
 
     WeatherControlPanel.prototype.hide = function() {
       this._isShown = false;
-      this.$el.removeClass("visible");
-      return false;
+      return this.$el.removeClass("visible");
     };
 
     WeatherControlPanel.prototype.resetPanels = function() {
